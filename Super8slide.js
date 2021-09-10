@@ -1,4 +1,4 @@
-// buttons that scroll to a certain element
+// setting buttons to scroll to a certain element
 
 const descBtn = document.getElementById('desc-button');
 const discoverBtn = document.getElementById('discover-button');
@@ -11,28 +11,7 @@ const specStart = document.getElementById('s-start');
 const formStart = document.getElementById('form-start');
 const start = document.querySelector('section:first-of-type');
 
-// Quote sliders
-
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
-const sliders = document.querySelectorAll(".slider");
-let i = 0;
-
-// Menu elements for toggle menu
-
-const menuBtn = document.getElementById("toggle-menu");
-const menu = document.getElementById("menu");
-
-// hide and show on scroll elements
-
-const spec1 = document.getElementById("spec1");
-const spec2 = document.getElementById("spec2");
-const spec3 = document.getElementById("spec3");
-const spec4 = document.getElementById("spec4");
-
-const [title1, title2] = document.querySelectorAll(".titles");
-
-// setting the scrolling buttons function
+// setting that scrolling functions
 
 function scrollToElement(element) {
   if (menu.getAttribute('class', 'opened')) {
@@ -47,32 +26,44 @@ specBtn.addEventListener('click', () => {scrollToElement(specStart)});
 orderBtn.addEventListener('click', () => {scrollToElement(formStart)});
 logo.addEventListener('click', () => {scrollToElement(start)});
 
-// setting the slider function
+// storing quote sliders
+
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const sliders = document.querySelectorAll(".slider");
+let i = 0;
+
+// setting the sliders function
 
 function nextSlide() {
- if (i === sliders.length - 1) {
-   i = 0;
-   sliders[sliders.length - 1].classList.remove("active");
- } else {
-   i++;
-   sliders[i - 1].classList.remove("active");
- }
- sliders[i].classList.add("active")
-}
-
-function prevSlide() {
-  if (i > 0) {
-    i--;
-    sliders[i + 1].classList.remove("active");
+  if (i === sliders.length - 1) {
+    i = 0;
+    sliders[sliders.length - 1].classList.remove("active");
   } else {
-    i = sliders.length - 1;
-    sliders[0].classList.remove("active");
+    i++;
+    sliders[i - 1].classList.remove("active");
   }
-  sliders[i].classList.add("active");
-}
+  sliders[i].classList.add("active")
+ }
+ 
+ function prevSlide() {
+   if (i > 0) {
+     i--;
+     sliders[i + 1].classList.remove("active");
+   } else {
+     i = sliders.length - 1;
+     sliders[0].classList.remove("active");
+   }
+   sliders[i].classList.add("active");
+ }
+ 
+ nextBtn.addEventListener("click", nextSlide);
+ prevBtn.addEventListener("click", prevSlide);
 
-nextBtn.addEventListener("click", nextSlide);
-prevBtn.addEventListener("click", prevSlide);
+// Menu elements for toggle menu
+
+const menuBtn = document.getElementById("toggle-menu");
+const menu = document.getElementById("menu");
 
 // Menu toggle function
 
@@ -83,6 +74,15 @@ function toggleMenu() {
   menu.classList.toggle('opened');
   menu.style.transition = 'transform 0.5s cubic-bezier(0,.45,.27,1.05) 0.2s';
 };
+
+// storing elemets that will appear and disappear on scrolling
+
+const spec1 = document.getElementById("spec1");
+const spec2 = document.getElementById("spec2");
+const spec3 = document.getElementById("spec3");
+const spec4 = document.getElementById("spec4");
+
+const [title1, title2] = document.querySelectorAll(".titles");
 
 // checking if elements appear on the screen
 
