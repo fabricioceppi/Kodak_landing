@@ -153,6 +153,10 @@ header img {
   border-right: 2px solid #f9b61b;
 }
 
+#desc-button, #spec-button, #logo {
+  cursor: pointer;
+}
+
 @media (hover: hover) {
 
 button:hover {
@@ -160,7 +164,7 @@ button:hover {
   transition: 0.5s;
 }
 
-a:hover {
+a:hover, #desc-button:hover, #spec-button:hover {
   color: #f9b61b;
 }
 

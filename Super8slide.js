@@ -1,3 +1,16 @@
+// buttons that scroll to a certain element
+
+const descBtn = document.getElementById('desc-button');
+const discoverBtn = document.getElementById('discover-button');
+const specBtn = document.getElementById('spec-button');
+const orderBtn = document.getElementById('order-button')
+const logo = document.getElementById('logo');
+
+const descStart = document.getElementById('d-start');
+const specStart = document.getElementById('s-start');
+const formStart = document.getElementById('form-start');
+const start = document.querySelector('section:first-of-type');
+
 // Quote sliders
 
 const prevBtn = document.getElementById("prev");
@@ -18,6 +31,21 @@ const spec3 = document.getElementById("spec3");
 const spec4 = document.getElementById("spec4");
 
 const [title1, title2] = document.querySelectorAll(".titles");
+
+// setting the scrolling buttons function
+
+function scrollToElement(element) {
+  if (menu.getAttribute('class', 'opened')) {
+  toggleMenu();
+}
+  element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
+}
+
+descBtn.addEventListener('click', () => {scrollToElement(descStart)});
+discoverBtn.addEventListener('click', () => {scrollToElement(descStart)});
+specBtn.addEventListener('click', () => {scrollToElement(specStart)});
+orderBtn.addEventListener('click', () => {scrollToElement(formStart)});
+logo.addEventListener('click', () => {scrollToElement(start)});
 
 // setting the slider function
 
@@ -48,11 +76,13 @@ prevBtn.addEventListener("click", prevSlide);
 
 // Menu toggle function
 
-menuBtn.addEventListener("click", function() {
-  menuBtn.classList.toggle("opened");
-  menu.classList.toggle("opened");
-  menu.style.transition = "transform 0.5s cubic-bezier(0,.45,.27,1.05) 0.2s";
-});
+menuBtn.addEventListener("click", toggleMenu);
+
+function toggleMenu() {
+  menuBtn.classList.toggle('opened');
+  menu.classList.toggle('opened');
+  menu.style.transition = 'transform 0.5s cubic-bezier(0,.45,.27,1.05) 0.2s';
+};
 
 // checking if elements appear on the screen
 
