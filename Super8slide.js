@@ -158,11 +158,16 @@ async function handleSubmit(event) {
     .then((response) => {
       status.style.color = '#f9b61b';
       status.innerHTML = "Congratulations! Your order has been sent properly";
+      status.style.opacity = '1';
       form.reset();
-      setTimeout(() => {status.innerHTML = ''}, 2000);
+      setTimeout(() => {
+        status.innerHTML = '';
+        status.style.opacity = '0';
+      }, 2000);
     })
     .catch((error) => {
       status.style.color = '#E30613';
+      status.style.opacity = '1';
       status.innerHTML = "There was a problem submitting your order. Please check your data";
     });
 }
