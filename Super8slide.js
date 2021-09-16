@@ -1,30 +1,44 @@
 // setting buttons to scroll to a certain element
 
-const descBtn = document.getElementById('desc-button');
-const discoverBtn = document.getElementById('discover-button');
-const specBtn = document.getElementById('spec-button');
-const orderBtn = document.getElementById('order-button')
-const logo = document.getElementById('logo');
+const descBtn = document.getElementById("desc-button");
+const discoverBtn = document.getElementById("discover-button");
+const specBtn = document.getElementById("spec-button");
+const orderBtn = document.getElementById("order-button");
+const logo = document.getElementById("logo");
 
-const descStart = document.getElementById('d-start');
-const specStart = document.getElementById('s-start');
-const formStart = document.getElementById('form-start');
-const start = document.querySelector('section:first-of-type');
+const descStart = document.getElementById("d-start");
+const specStart = document.getElementById("s-start");
+const formStart = document.getElementById("form-start");
+const start = document.querySelector("section:first-of-type");
 
 // setting that scrolling functions
 
 function scrollToElement(element) {
-  if (menu.getAttribute('class', 'opened')) {
-  toggleMenu();
-}
-  element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
+  if (menu.getAttribute("class", "opened")) {
+    toggleMenu();
+  }
+  element.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+    inline: "nearest",
+  });
 }
 
-descBtn.addEventListener('click', () => {scrollToElement(descStart)});
-discoverBtn.addEventListener('click', () => {scrollToElement(descStart)});
-specBtn.addEventListener('click', () => {scrollToElement(specStart)});
-orderBtn.addEventListener('click', () => {scrollToElement(formStart)});
-logo.addEventListener('click', () => {scrollToElement(start)});
+descBtn.addEventListener("click", () => {
+  scrollToElement(descStart);
+});
+discoverBtn.addEventListener("click", () => {
+  scrollToElement(descStart);
+});
+specBtn.addEventListener("click", () => {
+  scrollToElement(specStart);
+});
+orderBtn.addEventListener("click", () => {
+  scrollToElement(formStart);
+});
+logo.addEventListener("click", () => {
+  scrollToElement(start);
+});
 
 // storing quote sliders
 
@@ -43,22 +57,22 @@ function nextSlide() {
     i++;
     sliders[i - 1].classList.remove("active");
   }
-  sliders[i].classList.add("active")
- }
- 
- function prevSlide() {
-   if (i > 0) {
-     i--;
-     sliders[i + 1].classList.remove("active");
-   } else {
-     i = sliders.length - 1;
-     sliders[0].classList.remove("active");
-   }
-   sliders[i].classList.add("active");
- }
- 
- nextBtn.addEventListener("click", nextSlide);
- prevBtn.addEventListener("click", prevSlide);
+  sliders[i].classList.add("active");
+}
+
+function prevSlide() {
+  if (i > 0) {
+    i--;
+    sliders[i + 1].classList.remove("active");
+  } else {
+    i = sliders.length - 1;
+    sliders[0].classList.remove("active");
+  }
+  sliders[i].classList.add("active");
+}
+
+nextBtn.addEventListener("click", nextSlide);
+prevBtn.addEventListener("click", prevSlide);
 
 // Menu elements for toggle menu
 
@@ -70,10 +84,10 @@ const menu = document.getElementById("menu");
 menuBtn.addEventListener("click", toggleMenu);
 
 function toggleMenu() {
-  menuBtn.classList.toggle('opened');
-  menu.classList.toggle('opened');
-  menu.style.transition = 'transform 0.5s cubic-bezier(0,.45,.27,1.05) 0.2s';
-};
+  menuBtn.classList.toggle("opened");
+  menu.classList.toggle("opened");
+  menu.style.transition = "transform 0.5s cubic-bezier(0,.45,.27,1.05) 0.2s";
+}
 
 // storing elemets that will appear and disappear on scrolling
 
@@ -91,35 +105,65 @@ function onReach(element) {
   if (
     bounding.top >= 0 &&
     bounding.left >= 0 &&
-    bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
-    bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    bounding.right <=
+      (window.innerWidth || document.documentElement.clientWidth) &&
+    bounding.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight)
   ) {
     return true;
   }
-};
+}
 
 // visualizing elements reached by scrolling
 
 function visualize(element) {
-  element.style.transition = 'opacity 1s';
+  element.style.transition = "opacity 1s";
   if (onReach(element)) {
-    element.style.opacity = '1';
+    element.style.opacity = "1";
   } else {
-    element.style.opacity = '0';
+    element.style.opacity = "0";
   }
 }
 
 // scrolling events handler
 
-window.addEventListener("scroll", function() {
-  visualize(spec1);
-  visualize(spec2);
-  visualize(spec3);
-  visualize(spec4);
-  visualize(title1);
-  visualize(title2);
-}, false);
+window.addEventListener(
+  "scroll",
+  function () {
+    visualize(spec1);
+    visualize(spec2);
+    visualize(spec3);
+    visualize(spec4);
+    visualize(title1);
+    visualize(title2);
+  },
+  false
+);
 
+/* form submission */
 
+const form = document.getElementById("pre-order");
 
-
+async function handleSubmit(event) {
+  event.preventDefault();
+  var status = document.getElementById("pre-order-status");
+  var data = new FormData(event.target);
+  fetch(event.target.action, {
+    method: form.method,
+    body: data,
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((response) => {
+      status.style.color = '#f9b61b';
+      status.innerHTML = "Congratulations! Your order has been sent properly";
+      form.reset();
+      setTimeout(() => {status.innerHTML = ''}, 2000);
+    })
+    .catch((error) => {
+      status.style.color = '#E30613';
+      status.innerHTML = "There was a problem submitting your order. Please check your data";
+    });
+}
+form.addEventListener("submit", handleSubmit);

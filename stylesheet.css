@@ -364,6 +364,14 @@ form button {
   margin-left: 30%;
 }
 
+#pre-order-status {
+  display: block;
+  padding: 16px;
+  border: 1px solid #f9b61b;
+  border-radius: 2px;
+  margin-top: 20px;
+}
+
 /* Footer */
 
 footer {
@@ -377,7 +385,6 @@ footer > div, footer > p {
   margin-left: auto;
   margin-right: auto;
 }
-
 
 .img-float {
   width: 30%;
